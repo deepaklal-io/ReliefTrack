@@ -16,8 +16,6 @@
 
 <br/>
 
-[Overview](#-overview) • [Features](#-key-features) • [Prerequisites](#-prerequisites) • [Installation](#-installation--setup) • [Run the App](#-running-the-application) • [Modules](#-application-modules) • [Contributing](#-contributing) • [License](#-license)
-
 </div>
 
 ---
@@ -348,8 +346,8 @@ Contributions are welcome! Here's how to get involved:
 | Name | GitHub |
 |---|---|
 | **Shahzaib Mahar** | [@smaharx](https://github.com/smaharx) |
-| **Najaf** | — |    | [@najafalinajaf449-hue](https://github.com/najafalinajaf449-hue) |
-| **Deepak** | — |   | [@deepaklal-io](https://github.com/deepaklal-io) |
+| **Najaf**   | [@najafalinajaf449-hue](https://github.com/najafalinajaf449-hue) |
+| **Deepak**   | [@deepaklal-io](https://github.com/deepaklal-io) |
 
 ---
 
