@@ -2,7 +2,7 @@
 
 # 🆘 Disaster Relief Supply Distribution System
 
-### A structured desktop solution for coordinating disaster relief operations — manage affected families, track inventory, and generate operational reports with ease.
+### A Java-based desktop application to manage and streamline the distribution of essential supplies during disaster situations.
 
 <br/>
 
@@ -16,7 +16,7 @@
 
 <br/>
 
-[Features](#-key-features) • [Architecture](#-system-architecture) • [Tech Stack](#-technology-stack) • [Installation](#-installation) • [Usage](#-running-the-application) • [Modules](#-application-modules) • [Contributing](#-contributing) • [License](#-license)
+[Overview](#-overview) • [Features](#-key-features) • [Prerequisites](#-prerequisites) • [Installation](#-installation--setup) • [Run the App](#-running-the-application) • [Modules](#-application-modules) • [Contributing](#-contributing) • [License](#-license)
 
 </div>
 
@@ -24,9 +24,9 @@
 
 ## 📌 Overview
 
-When disasters strike, coordinated response saves lives. The **Disaster Relief Supply Distribution System** is a lightweight, desktop-based Java application built to help relief organizations take control of their operations quickly and efficiently.
+When disasters strike, coordinated response saves lives. The **Disaster Relief Supply Distribution System** helps authorities and relief organizations manage disaster events, track available supplies, and ensure timely delivery to affected areas.
 
-This system provides a centralized platform to:
+The system provides a centralized platform to:
 - Register and manage **disaster-affected families**
 - Track and restock **relief inventory** in real time
 - Generate **operational reports** for better decision-making
@@ -40,7 +40,7 @@ Built with **Java Swing** for a responsive desktop UI and **MySQL** for reliable
 
 | Feature | Description |
 |---|---|
-| 🔐 **User Authentication** | Secure login interface to restrict system access to authorized users |
+| 🔐 **User Authentication** | Secure login interface restricting access to authorized users only |
 | 👨‍👩‍👧 **Family Registration** | Register, view, and manage disaster-affected households |
 | 📦 **Inventory Management** | Track all available relief supplies with real-time quantity monitoring |
 | 🔄 **Restocking Module** | Add new stock or replenish existing supplies with ease |
@@ -53,8 +53,6 @@ Built with **Java Swing** for a responsive desktop UI and **MySQL** for reliable
 
 ## 🏗️ System Architecture
 
-The application follows a clean, **4-layer architecture** that ensures modularity, maintainability, and ease of future extension:
-
 ```
 ┌─────────────────────────────────────────────┐
 │          PRESENTATION LAYER                  │
@@ -65,7 +63,7 @@ The application follows a clean, **4-layer architecture** that ensures modularit
 ┌──────────────────▼──────────────────────────┐
 │         BUSINESS LOGIC LAYER                 │
 │    Inventory & Operational Management        │
-│       InventoryManager · Validators          │
+│            InventoryManager.java             │
 └──────────────────┬──────────────────────────┘
                    │
 ┌──────────────────▼──────────────────────────┐
@@ -81,20 +79,18 @@ The application follows a clean, **4-layer architecture** that ensures modularit
 └─────────────────────────────────────────────┘
 ```
 
-This separation of concerns ensures that UI changes don't affect business logic, and database migrations remain isolated from application code.
-
 ---
 
 ## 🛠️ Technology Stack
 
-| Component | Technology | Purpose |
-|---|---|---|
-| **Programming Language** | Java 8+ | Core application logic |
-| **GUI Framework** | Java Swing | Desktop user interface |
-| **Database** | MySQL | Persistent data storage |
-| **DB Connectivity** | JDBC | Java-to-database bridge |
-| **MySQL Driver** | mysql-connector-j 9.2.0 | MySQL JDBC driver |
-| **Table Rendering** | rs2xml | Populating Swing JTables from ResultSets |
+| Component | Technology |
+|---|---|
+| **Programming Language** | Java 8+ |
+| **GUI Framework** | Java Swing |
+| **Database** | MySQL |
+| **DB Connectivity** | JDBC |
+| **MySQL Driver** | mysql-connector 8.033-java.jar |
+| **Table Rendering** | rs2xml.jar |
 
 ---
 
@@ -107,30 +103,25 @@ DISASTER-MANAGEMENT-SYS/
 │   └── sqlcode.sql                  # Full DB schema & seed data
 │
 ├── 📂 disasterrelief/
-│   ├── 📂 database/
-│   │   ├── DBConnection.java        # Manages JDBC connection
-│   │   └── InventoryManager.java    # Core inventory business logic
-│   │
-│   ├── 📂 models/
-│   │   ├── Family.java              # Family data model
-│   │   └── InventoryItem.java       # Relief item data model
-│   │
-│   └── 📂 views/
-│       ├── LoginUI.java             # Authentication screen
-│       ├── MainUI.java              # Main dashboard/navigation
-│       ├── InventoryUI.java         # Inventory overview
-│       ├── ManageFamiliesUI.java    # Family management panel
-│       ├── RegisterFamilyUI.java    # New family registration form
-│       ├── RestockUI.java           # Supply restocking panel
-│       ├── ViewInventoryUI.java     # Inventory detail view
-│       └── ReportUI.java            # Report generation panel
+│   ├── DBConnection.java            # Manages JDBC connection & credentials
+│   ├── InventoryManager.java        # Core inventory business logic
+│   ├── Family.java                  # Family data model
+│   ├── InventoryItem.java           # Relief item data model
+│   ├── LoginUI.java                 # Authentication screen (entry point)
+│   ├── MainUI.java                  # Main dashboard & navigation
+│   ├── InventoryUI.java             # Inventory overview panel
+│   ├── ManageFamiliesUI.java        # Family management panel
+│   ├── RegisterFamilyUI.java        # New family registration form
+│   ├── RestockUI.java               # Supply restocking panel
+│   ├── ViewInventoryUI.java         # Inventory detail view
+│   └── ReportUI.java                # Report generation panel
+│
+├── 📂 lib/
+│   ├── mysql-connector-8.033-java.jar   # MySQL JDBC driver
+│   └── rs2xml.jar                       # ResultSet-to-JTable utility
 │
 ├── 📂 icon/
 │   └── login.png                    # Application icon assets
-│
-├── 📂 lib/
-│   ├── mysql-connector-j-9.2.0.jar  # MySQL JDBC driver
-│   └── rs2xml.jar                   # ResultSet-to-XML table utility
 │
 ├── .gitignore
 ├── LICENSE
@@ -139,156 +130,186 @@ DISASTER-MANAGEMENT-SYS/
 
 ---
 
-## ⚙️ Installation
+## ✅ Prerequisites
 
-### Prerequisites
+Before running the project, make sure the following are installed and ready:
 
-Make sure the following are installed on your system:
+| Requirement | Details |
+|---|---|
+| ☕ **Java JDK 8+** | [Download here](https://www.oracle.com/java/technologies/downloads/) |
+| 🐬 **MySQL Server** | [Download here](https://dev.mysql.com/downloads/mysql/) |
+| 🖥️ **CMD / Terminal** | Built-in on Windows, Linux, and macOS |
+| 💡 **Java IDE** *(optional)* | IntelliJ IDEA / Eclipse / NetBeans |
+| 📦 **Required JARs** | `mysql-connector-8.033-java.jar`, `rs2xml.jar` |
 
-- ✅ **Java JDK 8 or later** — [Download here](https://www.oracle.com/java/technologies/downloads/)
-- ✅ **MySQL Server 5.7+** — [Download here](https://dev.mysql.com/downloads/mysql/)
-- ✅ **Git** — [Download here](https://git-scm.com/)
+> ⚠️ **Important:** If any required JAR file or MySQL connector is missing, the application will **not** run. Ensure both JARs are present in the `lib/` directory before compiling.
 
-### Step 1 — Clone the Repository
+---
 
-```bash
-git clone https://github.com/smaharx/disaster-management-system.git
-cd disaster-management-system
-```
+## ⚙️ Installation & Setup
 
-### Step 2 — Database Setup
+### Step 1 — Set Up the MySQL Database
 
-Start your MySQL server, then create the database:
+1. Open **MySQL Workbench** or the **MySQL Command Line**.
+2. Open the provided SQL file: `database/sqlcode.sql`
+3. Execute all SQL statements to create the database and tables:
 
 ```sql
-CREATE DATABASE disaster_relief;
+-- Run this in MySQL Workbench or CLI
+SOURCE path/to/database/sqlcode.sql;
 ```
 
-Import the schema and seed data:
+Or via terminal:
 
 ```bash
-mysql -u root -p disaster_relief < database/sqlcode.sql
+mysql -u root -p < database/sqlcode.sql
 ```
 
-### Step 3 — Configure the Database Connection
-
-Open the file `disasterrelief/database/DBConnection.java` and update the following constants with your MySQL credentials:
+4. Open `disasterrelief/DBConnection.java` and update the credentials:
 
 ```java
-private static final String URL      = "jdbc:mysql://localhost:3306/disaster_relief";
+private static final String URL      = "jdbc:mysql://localhost:3306/disasterrelief";
 private static final String USERNAME = "your_mysql_username";
 private static final String PASSWORD = "your_mysql_password";
 ```
 
-> ⚠️ **Security Note:** Never commit real credentials to version control. Use environment variables or a `.env` config file for production deployments.
+> ⚠️ **Note:** If the database credentials are not set correctly, the login functionality will **not** work properly.
 
 ---
 
 ## ▶️ Running the Application
 
-### Compile the Source
+You can run the project in two ways — via **Command Prompt / Terminal** or using an **IDE**.
+
+---
+
+### Option A — Run Using Command Prompt (CMD)
+
+#### 1️⃣ Open Command Prompt and navigate to the project folder
 
 ```bash
-javac -cp "lib/*" -d out $(find . -name "*.java")
+cd C:\Users\YourUsername\Desktop\project
 ```
 
-> **Windows users** — replace `$(find . -name "*.java")` with a manual file list or use an IDE like IntelliJ IDEA or Eclipse.
-
-### Launch the Application
+#### 2️⃣ Compile all Java files in the `disasterrelief` package
 
 ```bash
-# Linux / macOS
-java -cp "out:lib/*" disasterrelief.views.MainUI
-
-# Windows
-java -cp "out;lib/*" disasterrelief.views.MainUI
+javac disasterrelief/*.java
 ```
 
-> 💡 **Tip:** For the smoothest experience, consider importing the project into **IntelliJ IDEA** or **Eclipse** and running it directly from the IDE with the `/lib` JARs added to the build path.
+This compiles all Java source files inside the package directory.
+
+#### 3️⃣ Run the application
+
+Make sure the class you run contains the `public static void main(String[] args)` method.
+
+**To launch the Login screen:**
+```bash
+java disasterrelief.LoginUI
+```
+
+**Or to launch the Main dashboard directly:**
+```bash
+java disasterrelief.MainUI
+```
+
+> 💡 **Tip (Windows):** If you encounter classpath errors with JARs, use:
+> ```bash
+> javac -cp "lib/*" -d out disasterrelief/*.java
+> java -cp "out;lib/*" disasterrelief.LoginUI
+> ```
+> On **Linux/macOS**, replace `;` with `:` in the classpath.
+
+---
+
+### Option B — Run Using an IDE
+
+1. Open **IntelliJ IDEA**, **Eclipse**, or **NetBeans**.
+2. Import the project as an **existing Java project**.
+3. Add the required JARs to the build path:
+   - `lib/mysql-connector-8.033-java.jar`
+   - `lib/rs2xml.jar`
+4. Ensure the **MySQL Server is running**.
+5. Locate `LoginUI.java` or `MainUI.java`.
+6. Right-click the file → select **Run**.
 
 ---
 
 ## 🖥️ Application Modules
 
 ### 🔐 Login Module
-Handles secure authentication of system users. Only authorized personnel can access the system, ensuring that sensitive relief data is protected.
+Entry point of the application. Handles secure authentication and restricts access to authorized personnel only.
 
 ### 👨‍👩‍👧 Family Management
-Register and manage disaster-affected households. Captures key details like family ID, head of household, address, contact information, and household size.
+Register and manage disaster-affected households. Captures key details like the head of family, address, contact information, and household size.
 
 ### 📦 Inventory Management
-Real-time tracking of all available relief resources. View quantities, filter by item type, and quickly identify what's running low.
+Real-time tracking of all available relief resources. View quantities and quickly identify what's running low.
 
 ### 🔄 Restocking Module
-Allows administrators to add new inventory items or top up quantities of existing supplies to meet ongoing demand.
+Allows administrators to add new inventory items or top up quantities of existing supplies.
 
 ### 📊 Inventory Dashboard
-A monitoring panel that provides an at-a-glance view of current stock levels across all relief categories.
+An at-a-glance monitoring panel for current stock levels across all relief categories.
 
 ### 📋 Report Generation
-Generates structured reports for both family records and inventory data — essential for coordination between field teams and headquarters.
+Generates structured reports for family records and inventory data — essential for coordination between field teams and headquarters.
 
 ---
 
 ## 🗃️ Data Models
 
 ### `Family`
-Represents a disaster-affected household registered in the system.
-
 | Field | Type | Description |
 |---|---|---|
 | `familyId` | INT | Unique household identifier |
 | `headOfFamily` | VARCHAR | Name of the registered head |
-| `address` | VARCHAR | Current location/address |
+| `address` | VARCHAR | Current location or address |
 | `contactInfo` | VARCHAR | Phone or contact details |
-| `householdSize` | INT | Total number of members |
+| `householdSize` | INT | Total number of family members |
 
 ### `InventoryItem`
-Represents a relief supply item tracked in the system.
-
 | Field | Type | Description |
 |---|---|---|
 | `itemId` | INT | Unique item identifier |
 | `itemName` | VARCHAR | Name of the relief item |
-| `description` | VARCHAR | Details about the item |
+| `description` | VARCHAR | Additional item details |
 | `quantity` | INT | Current stock count |
 
 ---
 
-## 📦 Dependencies
+## 📝 Important Notes
 
-All required libraries are bundled in the `/lib` directory — no additional package manager is needed.
-
-| Library | Version | Purpose |
-|---|---|---|
-| `mysql-connector-j` | 9.2.0 | MySQL JDBC connectivity driver |
-| `rs2xml` | Latest | Converts JDBC ResultSets into Swing JTable models |
+- ✅ Ensure the **MySQL server is running** before launching the application.
+- ✅ Keep `rs2xml.jar` in the project directory — it is required for table display.
+- ✅ Do **not** delete `.class` files after compilation unless you plan to recompile.
+- ✅ Always verify your database credentials in `DBConnection.java` before running.
+- ✅ For production use, store DB credentials in environment variables — never hardcode them.
 
 ---
 
 ## 🔒 Security Considerations
 
-- **Never hardcode credentials** — use environment variables or a config file excluded from version control for any production deployment.
-- **Use parameterized queries** — all database interactions should use `PreparedStatement` to prevent SQL injection attacks.
-- **Restrict DB user permissions** — create a dedicated MySQL user with only the permissions needed by this application (`SELECT`, `INSERT`, `UPDATE`, `DELETE` on `disaster_relief` only).
+- **Never commit credentials** to version control — use environment variables or a `.env` config file excluded via `.gitignore`.
+- **Use parameterized queries** (`PreparedStatement`) in all DB interactions to prevent SQL injection.
+- **Restrict MySQL user permissions** — grant only `SELECT`, `INSERT`, `UPDATE`, `DELETE` on the `disaster_relief` database.
 
 ---
 
 ## 🐛 Troubleshooting
 
-| Problem | Likely Cause | Fix |
+| Problem | Likely Cause | Solution |
 |---|---|---|
-| `Connection refused` | MySQL not running | Start MySQL service |
-| `Access denied for user` | Wrong credentials | Update `DBConnection.java` |
-| `ClassNotFoundException: com.mysql.cj.jdbc.Driver` | JAR missing from classpath | Ensure `lib/` is in `-cp` |
-| `Table doesn't exist` | Schema not imported | Re-run `sqlcode.sql` import |
-| Blank JTable on load | `rs2xml.jar` missing | Add `rs2xml.jar` to classpath |
+| `Connection refused` | MySQL server not running | Start the MySQL service |
+| `Access denied for user` | Wrong DB credentials | Update `DBConnection.java` |
+| `ClassNotFoundException` for driver | JAR missing from classpath | Add `mysql-connector.jar` to `-cp` |
+| `Table doesn't exist` | Schema not imported | Re-run `sqlcode.sql` |
+| Blank JTable on load | `rs2xml.jar` missing | Add it to the classpath |
+| Compilation errors | Wrong package path | Run `javac` from the project root |
 
 ---
 
 ## 🚀 Future Improvements
-
-The following features are planned or proposed for future development:
 
 - [ ] 🌐 Web-based interface (Spring Boot + React)
 - [ ] ☁️ Cloud database integration (AWS RDS / Firebase)
@@ -303,7 +324,7 @@ The following features are planned or proposed for future development:
 
 ## 🤝 Contributing
 
-Contributions are welcome and appreciated! Here's how to get involved:
+Contributions are welcome! Here's how to get involved:
 
 1. **Fork** the repository
 2. **Create** a feature branch
@@ -320,19 +341,22 @@ Contributions are welcome and appreciated! Here's how to get involved:
    ```
 5. **Open a Pull Request** — describe what you changed and why
 
-Please ensure your code follows consistent formatting and includes comments where necessary.
-
 ---
 
 ## 👥 Authors & Contributors
 
-This project was built as a collaborative effort:
-
 | Name | GitHub |
 |---|---|
 | **Shahzaib Mahar** | [@smaharx](https://github.com/smaharx) |
-| **Najaf** | — |     
-| **Deepak** | — |  [@deepaklal-io](https://github.com/deepaklal-io) | 
+| **Najaf** | — |    | [@najafalinajaf449-hue](https://github.com/najafalinajaf449-hue) |
+| **Deepak** | — |   | [@deepaklal-io](https://github.com/deepaklal-io) |
+
+---
+
+
+## ✅ Conclusion
+
+The **Disaster Relief Supply Distribution System** provides an efficient and reliable solution for managing relief supply distribution using **Java** and **MySQL** through **JDBC connectivity**. Whether deployed by a field team or a coordination center, it delivers the structure and reliability needed when it matters most.
 
 ---
 
